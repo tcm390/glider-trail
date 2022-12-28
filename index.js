@@ -10,7 +10,7 @@ const maskTexture = textureLoader.load(`${baseUrl}textures/Trail11.png`);
 maskTexture.wrapS = maskTexture.wrapT = THREE.RepeatWrapping;
 
 const gradientMaskTexture = textureLoader.load(`${baseUrl}textures/gradient-mask.png`);
-const gradientMaskTexture2 = textureLoader.load(`${baseUrl}textures/gradient-mask2.png`);
+const gradientMaskTexture2 = textureLoader.load(`${baseUrl}textures/gradient-mask3.png`);
 // gradientMaskTexture.wrapS = gradientMaskTexture.wrapT = THREE.RepeatWrapping;
 
 const trailTexture = textureLoader.load(`${baseUrl}textures/trail.png`);
@@ -26,7 +26,7 @@ export default () => {
   const {renderer, camera} = useInternals();
 
   // gliderInfo
-  let gliderWidth = 2.6;
+  let gliderWidth = 2.65;
   let gliderHeight = 0.72;
   let gliderPosZ = 0.2;
   const _setGliderInfo = (value) => {

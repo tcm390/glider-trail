@@ -71,15 +71,16 @@ const _createTrailMaterial = () => {
         
         void main() {
           float mask = texture2D(maskTexture, vUv).r;
-          float maskStep = clamp(texture2D(gradientMaskTexture, vUv.yx).r - 0.005, 0.0, 1.0);
-          mask = step(maskStep, mask);
+          // float maskStep = clamp(texture2D(gradientMaskTexture, vUv.yx).r - 0.005, 0.0, 1.0);
+          // mask = step(maskStep, mask);
+          float headFade = 1. - texture2D(gradientMaskTexture, vUv.yx).r;
           float alphaMask = texture2D(gradientMaskTexture2, vUv.yx).r;
 
           vec4 voronoiNoise = texture2D(
             voronoiNoiseTexture,
             vec2(
-              0.45 * vUv.x,
-              0.45 * vUv.y + uTime * 0.5
+              0.25 * vUv.x,
+              0.25 * vUv.y + uTime * 0.5
             )
           );  
           vec4 trail = texture2D(
@@ -90,9 +91,9 @@ const _createTrailMaterial = () => {
             )
           );  
           float p = 1.5;
-          voronoiNoise = vec4(pow(voronoiNoise.r, p), pow(voronoiNoise.g, p), pow(voronoiNoise.b, p), voronoiNoise.a) * 1.4;
+          voronoiNoise = vec4(pow(voronoiNoise.r, p), pow(voronoiNoise.g, p), pow(voronoiNoise.b, p), voronoiNoise.a);
           gl_FragColor.rgb = vec3(0.95);
-          gl_FragColor.a = smoothstep(0.2, 0.8, mask * alphaMask * trail.r * voronoiNoise.r * uOpacity * 0.9);
+          gl_FragColor.a = smoothstep(0.2, 0.5, mask * trail.r * voronoiNoise.r * uOpacity) * 0.5 * alphaMask * headFade;
  
           ${THREE.ShaderChunk.logdepthbuf_fragment}
         }

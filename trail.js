@@ -4,7 +4,7 @@ import _createTrailMaterial from './trail-material.js';
 import {
 	Mesh,
 } from 'three';
-const planeNumber = 80;
+const planeNumber = 100;
 const trailWidth = 0.1;
 const point1 = new THREE.Vector3();
 const point2 = new THREE.Vector3();
